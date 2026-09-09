@@ -1,0 +1,44 @@
+---
+description: Casual game-dev comments only where the code isn't obvious. no XML docs. short file header.
+alwaysApply: true
+---
+
+# Code comments
+
+Write like a teammate at 1am, not a library author. lowercase is fine. don't comment everything. skip a line if a decent game dev would get it from the code.
+
+no em dashes. use a comma, period, or hyphen.
+
+## File header
+
+first thing in the type (after usings/namespace): one or two `//` lines saying what the script is / what it owns / what not to touch. not a formal banner.
+
+## When to comment
+
+- math / coordinate spaces / sign flips / timing that isn't obvious just by looking
+- a gotcha or a fix so the next pass doesn't "correct" it back
+- a weird Unity / pipeline thing (LateUpdate vs render, Y-down vs view-up, etc)
+
+inline is good. one short line above or on the same line. don't plan comments for every function.
+
+## Don't
+
+- `/// <summary>` / `<param>` / XML doc tags. we don't use that.
+- formal headers, perfect grammar, changelog essays
+- restating the next line (`// increment i`)
+- commenting every method, field, or obvious control flow just to "be complete"
+
+## Examples
+
+```csharp
+// ❌ too formal / everywhere
+/// <summary>
+/// Applies the snap compensation offset to the destination rectangle.
+/// </summary>
+drawX += offset; // add offset to drawX
+
+// ✅ enough
+// nearest ignores sub-texel UVs, smooth pan comes from moving the dest
+drawX += -error.x * px; // error is view-space (Y up); present matrix is Y-down
+drawY += error.y * py;
+```

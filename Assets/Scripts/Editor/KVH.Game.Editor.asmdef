@@ -1,0 +1,21 @@
+{
+    "name": "KVH.Game.Editor",
+    "rootNamespace": "KVH.Game.Editor",
+    "references": [
+        "KVH.Game",
+        "KVH.KylePixelator",
+        "UnityEngine.UI",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

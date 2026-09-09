@@ -1,0 +1,28 @@
+---
+description: Research well, then ship the simplest path. no overbuilt systems.
+alwaysApply: true
+---
+
+# Keep it simple
+
+We're vibe-coding. Do the homework, then pick the smallest thing that actually works. Prefer direct, efficient code over architecture.
+
+## Do
+
+- Read the existing code and pick an approach that fits it
+- Solve the real need with the fewest types, files, and indirection
+- Reuse what's already here (components, helpers, scene setup)
+- Read `Assets/Docs/Architecture.md` before adding a JRPG system (combat, inventory, UI)
+- Prefer a clear function or component over a new framework, manager, or pipeline
+- Optimize the hot path when it matters; otherwise keep it cheap and readable
+
+## Don't
+
+- Invent registries, service locators, plugin systems, or event buses for a one-off
+- Add interfaces, factories, or config layers "for later" without a second real consumer
+- Build a parallel stack next to Unity / existing HD2D plumbing
+- Turn a small fix into a rewrite or a new subsystem
+
+## Gut check
+
+If the ask is "move X" or "fix Y" and the plan needs new managers, ScriptableObject graphs, or a whole pipeline, stop. Do the straightforward version unless that path is actually wrong.

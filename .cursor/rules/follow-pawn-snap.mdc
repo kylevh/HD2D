@@ -1,0 +1,31 @@
+---
+description: Follow-pawn jitter vs pixel snap — current stack, remaining diagonal tad, what failed
+alwaysApply: true
+---
+
+# Follow pawn vs camera snap
+
+## Current stack (keep this)
+
+Last known-good for **stationary + character in all directions**. Do not turn one of these off to debug another as a first pass.
+
+- `enablePixelSnap` on, `enableSnapCompensate` **off** (no dest-slide)
+- `CameraRig` independent `Mathf.Round` on camera right/up (no stored cell)
+- `GameCamera` damp 0, `FollowPoint` height rounded to whole texels along `camera.up`
+- Follow visual: `VisualSnap` ViewGlue with live `Round` of camera-relative origin
+- `PlayerMotor` analog / camera-relative move + `RotateTowards`
+
+**Looks locked:** stationary world, character walk in all directions. Pan is 1px steps.
+
+**Still jittery:** the **environment** steps (noticeable going sideways). Dest-slide hides that but slides the hero too; user asked dest-slide off again.
+
+## Do not re-run as a first pass
+
+- **8-way / king-step camera snap**. Desyncs on direction change.
+- Dest-slide on (slides the follow pawn).
+- ViewGlue **pin**, dest-slide to whole screen pixels, 8-way motor + instant facing.
+- Old F8 A/B: SkipHero, PinLockstep, PointSlide, FollowPlane, CallusClassic, SnapOnly, NoOutlines, SoftGround, extra hysteresis, ToonLit vertex snap, F8 Off/Snap/Callus.
+
+## If asked to fix world stepping again
+
+Dest-slide is the world fix. It moves the hero. Next is a new design (pixel expansion, or hero not in that present). Notes: `Assets/KylePixelator/Docs/README.md` (Follow pawn jitter).

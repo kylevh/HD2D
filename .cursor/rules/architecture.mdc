@@ -1,0 +1,28 @@
+---
+description: JRPG architecture — folders, deps, UI, no spaghetti
+alwaysApply: true
+---
+
+# JRPG architecture
+
+Turn-based / strategy JRPG. Full notes: `Assets/Docs/Architecture.md`.
+
+## Deps
+
+`KVH.Game` → `KVH.KylePixelator` → URP. Pixelator never imports Game. No extra asmdefs until a real cycle exists.
+
+## Folders = namespaces
+
+`Assets/Scripts/Runtime/<Feature>/` → `KVH.Game.<Feature>`. Name the job (`PlayerMotor`, `Interactable`), not `XxxManager`. Scene roots: `PixelCamera`, `GameInput`, `GameFlow`, `GameUI`, `Player`.
+
+## Modes
+
+`GameFlow.Mode` is Exploration / Menu / Battle. Battle code lives in `Combat/`, not `if (inBattle)` inside `PlayerMotor`. Freeze the pawn with `PlayerMotor.Busy` — dialogue/UI set it; they do not call `Move()`.
+
+## UI
+
+**uGUI** overlay (`UiRoot`, Screen Space Overlay). HUD/inventory/menus are children of `GameUI`. Never HUD/OnGUI inside `LowResOutput` or `PixelPresentCamera` (cullingMask 0). Do not add UI Toolkit unless uGUI is actually bursting.
+
+## Don't
+
+God `GameManager`, event bus, DI, interfaces before a second consumer, Find in a loop, item logic in Button OnClick.

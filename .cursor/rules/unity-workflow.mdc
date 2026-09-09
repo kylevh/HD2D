@@ -1,0 +1,31 @@
+---
+description: How to work in this Unity HD2D project
+alwaysApply: true
+---
+
+# HD2D Unity workflow
+
+Keep the Unity Editor open on this project (`C:\Users\User\Documents\Unity\HD2D`).
+
+## Use Unity (MCP / `unity command`) for Editor-owned data
+
+Scenes, prefabs, GameObjects, components, transforms, import settings, materials, packages, play mode, console, hierarchy.
+
+Never hand-edit `.unity`, `.prefab`, or `.asset` YAML while the Editor is connected.
+
+## Edit C# in the repo
+
+Write gameplay code under `Assets/Scripts`. After new scripts, wait for compile (`recompile` / `recompile_status`) before `attach_script`.
+
+Prefer `unity command` / Unity MCP over guessing scene YAML.
+
+## Layout
+
+- `Assets/Scripts/Runtime` — `KVH.Game` (feature folders: `Player`, `Input`, `Interaction`, `Lighting`, `Camera`, `Flow`, `UI`, …)
+- `Assets/Scripts/Editor` — `KVH.Game.Editor`
+- `Assets/KylePixelator` — presentation only (`KVH.KylePixelator`)
+- `Assets/Docs/Architecture.md` — JRPG deps, UI, naming
+- Scenes: `CastleYard` (brick yard explore), `PondLab` (water), `Field` (outdoor grass), `SceneSandbox` (bare prototype), `MovementLab`, `RoomDemo`, `PixelLab` (raw shader lab)
+- Art, audio, prefabs, ScriptableObjects in their named folders
+
+If `unity status` is not `ready`, fix the Editor connection before changing scenes.
